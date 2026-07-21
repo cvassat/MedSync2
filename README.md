@@ -11,7 +11,7 @@ MedSync2 is a Streamlit-based planning calculator that estimates additional medi
 - Fractional doses and remaining quantities use `Decimal` precision.
 - Calculation logic is separated from the Streamlit presentation layer.
 - Endpoint inclusion is explicit for both the calculation date and aligned refill date.
-- Validation, regression tests, app tests, linting, typing, security scanning, dependency auditing, CodeQL, Dependabot, and container hardening are included.
+- Validation, regression tests, app tests, linting, typing, security scanning, dependency auditing, CodeQL, dependency review, Dependabot, and container hardening are included.
 - Privacy, clinical, deployment, and compliance limitations are explicit.
 
 ## Calculation model
