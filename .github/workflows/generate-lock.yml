@@ -15,7 +15,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   compile:
@@ -27,7 +27,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v6
         with:
-          persist-credentials: false
+          persist-credentials: true
 
       - name: Set up Python
         uses: actions/setup-python@v6
@@ -69,3 +69,18 @@ jobs:
             requirements-dev.lock
           if-no-files-found: error
           retention-days: 7
+
+      - name: Commit generated locks to hardening branch
+        if: >-
+          github.event_name == 'push' &&
+          github.ref == 'refs/heads/comprehensive-code-hardening-2026-07-21'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add requirements.lock requirements-dev.lock
+          if git diff --cached --quiet; then
+            echo "Lock files are already current."
+            exit 0
+          fi
+          git commit -m "Add generated hashed dependency locks"
+          git push
