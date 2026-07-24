@@ -4,6 +4,19 @@ MedSync2 is a Streamlit-based planning calculator that estimates additional medi
 
 > **Important:** This is a mathematical planning aid, not medical advice or a prescribing/dispensing system. Independently verify every result. Do not enter patient identifiers unless a deployment has been specifically approved for that data.
 
+## Approved operating posture
+
+The owner-approved target posture is:
+
+- internal/intranet use only;
+- private GitHub repository;
+- approved internal users only;
+- synthetic or non-identifiable entries only;
+- no prescribing, dispensing, medication-ordering, or clinical-decision use;
+- automatic pull-request merge only after required checks pass.
+
+Repository visibility and platform protection settings must be confirmed in GitHub administration. See [`docs/owner-decisions-2026-07-24.md`](docs/owner-decisions-2026-07-24.md).
+
 ## Hardened baseline
 
 - Date-only calculations eliminate clock-time off-by-one behavior.
@@ -13,6 +26,7 @@ MedSync2 is a Streamlit-based planning calculator that estimates additional medi
 - Endpoint inclusion is explicit for both the calculation date and aligned refill date.
 - Validation, regression tests, app tests, linting, typing, security scanning, dependency auditing, CodeQL, dependency review, Dependabot, and container hardening are included.
 - Privacy, clinical, deployment, and compliance limitations are explicit.
+- Runtime and development dependency locks are generated with hashes and verified by an isolated GitHub Actions workflow.
 
 ## Calculation model
 
@@ -41,6 +55,12 @@ python -m pip install --requirement requirements.txt
 streamlit run med_sync_app.py
 ```
 
+When a reviewed `requirements.lock` is present, prefer the hash-locked installation:
+
+```bash
+python -m pip install --require-hashes --requirement requirements.lock
+```
+
 On Windows PowerShell, activate with `.venv\Scripts\Activate.ps1`.
 
 ## Development checks
@@ -56,6 +76,12 @@ python -m compileall -q medsync med_sync_app.py tests
 python -m pip_audit --requirement requirements.txt
 ```
 
+When a reviewed `requirements-dev.lock` is present, install it with:
+
+```bash
+python -m pip install --require-hashes --requirement requirements-dev.lock
+```
+
 ## Container
 
 ```bash
@@ -63,7 +89,7 @@ docker build -t medsync2 .
 docker run --rm -p 8501:8501 medsync2
 ```
 
-Then open `http://localhost:8501`.
+Then open `http://localhost:8501` from an approved internal network path only.
 
 ## Repository layout
 
@@ -73,20 +99,26 @@ Then open `http://localhost:8501`.
 - `docs/architecture/application-design.md`: application contract, boundaries, and exclusions.
 - `docs/code-review-and-hardening-report-2026-07-21.md`: review findings, remediation, and residual risks.
 - `docs/release-readiness-checklist.md`: pre-merge and pre-deployment gate.
+- `docs/owner-decisions-2026-07-24.md`: owner-approved license, use, review, merge, and visibility decisions.
 - `SECURITY.md`: security reporting and production-control requirements.
+- `LICENSE`: MIT license.
 - `docs/azure-essentials-operationalization.md`: existing cloud-adoption governance and source boundary.
 - `docs/cloud-adoption-backlog.md`: existing cloud implementation backlog.
 - `docs/architecture/azure-landing-zone-decision-record.md`: existing pre-production Azure decision scaffold.
 
 ## Privacy and compliance boundary
 
-The repository does not currently implement authentication, authorization, persistent storage, audit logging, or a regulated production environment. The application code does not intentionally persist entries, but hosted use transmits values between browser and server. See `SECURITY.md` before any deployment involving sensitive or regulated data.
+The repository does not currently implement authentication, authorization, persistent storage, audit logging, or a regulated production environment. The application code does not intentionally persist entries, but hosted use transmits values between browser and server.
 
-No claim of HIPAA, HITRUST, SOC 2, FedRAMP, or other compliance status is made.
+The approved current use is internal/intranet with synthetic or non-identifiable data. Private repository visibility does not replace application-level access control, TLS, data governance, or deployment hardening. See `SECURITY.md` before deployment.
+
+No claim of HIPAA, HITRUST, SOC 2, FedRAMP, medical-device, clinical-validation, or other compliance status is made.
 
 ## Known limitations
 
 This calculator does not account for variable dosing, PRN use, tapers, adherence, package sizes, insurance restrictions, controlled-substance rules, pharmacy policies, or clinical appropriateness. It does not choose dispensing increments or round quantities for a pharmacy.
+
+The owner has not required a separate external clinical/pharmacy review for the current internal, calculation-only use case. Expansion into patient-specific, prescribing, dispensing, pharmacy-workflow, payer, or clinical-decision use reopens that review requirement.
 
 ## Azure Essentials operating model
 
@@ -97,3 +129,7 @@ The repository's existing cloud-adoption package organizes future cloud work int
 3. **Manage and optimize:** observability, reliability, backup and restore, cost review, and ongoing remediation.
 
 Azure guidance informs planning; final implementation decisions still require current Microsoft documentation, actual product requirements, and approved data/compliance assumptions.
+
+## License
+
+MedSync2 is licensed under the [MIT License](LICENSE).
