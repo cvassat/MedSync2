@@ -9,8 +9,8 @@ WORKDIR /app
 
 RUN useradd --create-home --uid 10001 appuser
 
-COPY requirements.txt ./
-RUN python -m pip install --requirement requirements.txt
+COPY requirements.lock ./
+RUN python -m pip install --require-hashes --requirement requirements.lock
 
 COPY --chown=appuser:appuser med_sync_app.py ./
 COPY --chown=appuser:appuser medsync ./medsync
