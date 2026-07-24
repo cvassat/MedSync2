@@ -14,7 +14,9 @@ Do not disclose a suspected vulnerability in a public issue. Use GitHub's privat
 
 The application is a calculation-only Streamlit interface. The repository does not currently implement authentication, authorization, a database, an API, audit logging, or a managed-secret integration.
 
-This absence is not evidence that a public deployment is suitable for protected health information. A hosted Streamlit session transmits values between the user's browser and the application server even when the code does not intentionally persist them.
+The owner-approved current posture is private-repository, internal/intranet use with synthetic or non-identifiable entries only. This posture does not authorize protected or identifiable patient data and does not convert repository privacy into application access control.
+
+A hosted Streamlit session transmits values between the user's browser and the application server even when the code does not intentionally persist them. Public internet exposure is outside the approved current posture.
 
 ## Data-handling rules
 
@@ -22,8 +24,14 @@ This absence is not evidence that a public deployment is suitable for protected 
 - Do not log medication entries or calculation results.
 - Do not commit secrets, credentials, tenant identifiers, subscription identifiers, or patient data.
 - Treat screenshots, exported results, and server logs as potentially sensitive.
+- Use synthetic or non-identifiable examples only.
+- Restrict access to approved internal users through an approved internal network path and TLS.
 
-## Production deployment minimums
+## Clinical-use boundary
+
+The application is not a prescribing, dispensing, medication-ordering, pharmacy-workflow, payer, or clinical-decision system. The owner has not required a separate external clinical/pharmacy review for the current internal, calculation-only use case. Any expansion beyond that scope reopens the review and control requirements.
+
+## Controls required before identifiable-data use
 
 Before handling regulated or identifiable health information, document and approve at least:
 
@@ -36,4 +44,15 @@ Before handling regulated or identifiable health information, document and appro
 - backup and recovery requirements, if persistence is added;
 - vendor agreements and compliance scope appropriate to the deployment.
 
-No compliance certification or regulatory suitability is claimed by this repository.
+## Repository administration
+
+The owner-approved target settings are:
+
+- private repository visibility;
+- required CI, CodeQL, and dependency-review checks on `main`;
+- automatic pull-request merge only after required checks pass;
+- dependency graph, Dependabot alerts, and secret scanning enabled where supported.
+
+These are GitHub administration settings and must be verified separately from the code diff.
+
+No compliance certification, regulated-data authorization, clinical-validation claim, or regulatory suitability is established by this repository.
