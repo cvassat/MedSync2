@@ -1,12 +1,6 @@
 name: Generate dependency locks
 
 on:
-  push:
-    branches: [comprehensive-code-hardening-2026-07-21]
-    paths:
-      - requirements.txt
-      - requirements-dev.txt
-      - .github/workflows/generate-lock.yml
   pull_request:
     paths:
       - requirements.txt
@@ -24,9 +18,10 @@ jobs:
     timeout-minutes: 15
 
     steps:
-      - name: Check out repository
+      - name: Check out pull-request branch
         uses: actions/checkout@v6
         with:
+          ref: ${{ github.event.pull_request.head.ref || github.ref_name }}
           persist-credentials: true
 
       - name: Set up Python
@@ -70,10 +65,11 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
-      - name: Commit generated locks to hardening branch
+      - name: Commit generated locks to same-repository hardening branch
         if: >-
-          github.event_name == 'push' &&
-          github.ref == 'refs/heads/comprehensive-code-hardening-2026-07-21'
+          github.event_name == 'pull_request' &&
+          github.event.pull_request.head.repo.full_name == github.repository &&
+          github.event.pull_request.head.ref == 'comprehensive-code-hardening-2026-07-21'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -83,4 +79,4 @@ jobs:
             exit 0
           fi
           git commit -m "Add generated hashed dependency locks"
-          git push
+          git push origin HEAD:${{ github.event.pull_request.head.ref }}
