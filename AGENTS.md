@@ -46,6 +46,25 @@ Every cloud, AI, governance, or documentation PR should answer:
 - What security, cost, reliability, and compliance assumptions are introduced?
 - What remains unverified or environment-specific?
 
+## Compliance and PHI guardrails
+
+These rules apply to every agent, Codex task, and human contributor. Violating any of them is a blocking issue.
+
+### Hard rules — never do these
+
+1. **Never encode independent outpatient PMHNP Schedule II signing authority.** Texas PMP policy requires collaborative practice agreement oversight for Schedule II controlled substances by PMHNPs in outpatient settings. Any logic that grants or implies standalone Schedule II prescribing authority for outpatient PMHNPs must not be committed.
+2. **Never count a score-only PDMP workflow as a full report review by default.** Retrieving or displaying a risk score alone does not satisfy the full PDMP report-review requirement. Any workflow step modelling PDMP compliance must distinguish between score-only retrieval and full report review.
+3. **Never expose raw patient identifiers in dashboard marts.** Analytics views, reporting marts, and dashboard queries must use de-identified or tokenized references. Direct patient identifiers (MRN, name, DOB, SSN, contact info) must not appear in mart tables or exported query results.
+
+### General compliance rules
+
+- **No PHI in the repository.** Do not commit, log, or embed protected health information in source code, configuration files, test fixtures, documentation, or comments. Use synthetic data or clearly labelled placeholder tokens in tests and examples.
+- **No invented policy rules.** Do not encode a regulatory interpretation, clinical workflow rule, or compliance requirement that is not explicitly sourced from a cited policy document, vendor specification, or owner-approved decision record. If the authoritative source is unknown, use a `TODO` comment instead.
+- **TODOs instead of assumptions.** When a source document, vendor field mapping, clinical rule, or regulatory citation is unknown at implementation time, insert a `TODO(compliance):` comment that describes exactly what must be resolved before the code can be considered production-ready. Do not guess or fill in plausible-sounding values.
+- **Small, reviewable pull requests.** Break work into PRs that can be reviewed in a single sitting. PRs that touch compliance logic, data model fields, or PDMP/PMP workflow must not exceed 400 changed lines without owner approval.
+- **Compliance reviewer signoff for policy logic.** Any PR that adds or modifies clinical decision rules, PDMP query logic, prescribing authority checks, or de-identification logic must include a signoff comment from a designated compliance reviewer before merge. Tag the reviewer in the PR description using the label `compliance-review`.
+- **Source-boundary documentation required.** Every compliance-relevant decision must be traceable to one of the four source-boundary categories defined in the *Source-boundary rules* section above. State the category explicitly in the PR description or decision record.
+
 ## Recommended docs to keep current
 
 - `README.md`: concise repository orientation and links.
