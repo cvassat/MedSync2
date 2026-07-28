@@ -19,7 +19,7 @@ AGENTS.md @NEH-Psychiatry/medsync-maintainers @NEH-Psychiatry/compliance-reviewe
 docs/architecture/ @NEH-Psychiatry/medsync-maintainers @NEH-Psychiatry/compliance-reviewers
 
 # Pull request template changes require maintainer approval.
-.github/pull-request-template.md @NEH-Psychiatry/medsync-maintainers
+.github/pull_request_template.md @NEH-Psychiatry/medsync-maintainers
 
 # Application source code requires maintainer review.
 med_sync_app.py @NEH-Psychiatry/medsync-maintainers

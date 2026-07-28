@@ -15,7 +15,7 @@ This backlog converts the Azure Essentials update research into GitHub-trackable
 ### P0-1: Establish source-boundary and coding-agent rules
 
 - Status: **complete**.
-- Files: `AGENTS.md`, `.github/copilot-instructions.md`, `.github/pull-request-template.md`, `.github/ISSUE_TEMPLATE/`, `CONTRIBUTING.md`, `SECURITY.md`, `CODEOWNERS`.
+- Files: `AGENTS.md`, `.github/copilot-instructions.md`, `.github/pull_request_template.md`, `.github/ISSUE_TEMPLATE/`, `CONTRIBUTING.md`, `SECURITY.md`, `CODEOWNERS`.
 - Definition of done:
   - ✅ Coding agents can distinguish source-derived Azure points, current Microsoft documentation, MedSync2 decisions, and general market analysis.
   - ✅ New files use hyphenated names except GitHub-reserved directories.

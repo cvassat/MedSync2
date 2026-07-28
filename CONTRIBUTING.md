@@ -25,7 +25,7 @@ Use the appropriate issue template from [`.github/ISSUE_TEMPLATE/`](.github/ISSU
 ## Pull requests
 
 1. **Keep PRs small and focused.** One concern per PR. Do not mix policy logic, data model changes, and infrastructure changes.
-2. **Use the PR template.** Fill in every section of [`.github/pull-request-template.md`](.github/pull-request-template.md).
+2. **Use the PR template.** Fill in every section of [`.github/pull_request_template.md`](.github/pull_request_template.md).
 3. **Compliance-sensitive PRs require a compliance reviewer.** Any PR that touches PMP workflow logic, PDMP integration, prescribing authority rules, controlled-substance scheduling, or patient-identifier handling must:
    - Add a compliance owner as a reviewer.
    - Be labeled `compliance-review-required`.

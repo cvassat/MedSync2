@@ -24,7 +24,7 @@ The Azure Essentials framework provides MedSync2 with a structured path to addre
 |---|---|---|
 | Coding-agent guardrails | `AGENTS.md` | Hard constraints for every contributor, agent, and Codex task |
 | Copilot generation defaults | `.github/copilot-instructions.md` | Inline guardrails for AI-assisted code generation |
-| Compliance PR template | `.github/pull-request-template.md` | Gated checklist for compliance-sensitive changes |
+| Compliance PR template | `.github/pull_request_template.md` | Gated checklist for compliance-sensitive changes |
 | Issue templates | `.github/ISSUE_TEMPLATE/` | Codex-ready templates for data model, vendor mapping, dashboard, and compliance review work |
 | Azure landing-zone decision record | `docs/architecture/azure-landing-zone-decision-record.md` | Defines decisions required before cloud deployment |
 | Identity and access decision record | `docs/architecture/identity-and-access-decision-record.md` | Defines identity model, authentication, and audit requirements |
