@@ -1,0 +1,28 @@
+# CODEOWNERS
+#
+# Each line maps a file pattern to one or more owner teams or users.
+# Owners are automatically requested for review on any PR that touches matching files.
+#
+# Syntax: <pattern> <owner> [<owner> ...]
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owner for everything not matched below.
+* @NEH-Psychiatry/medsync-maintainers
+
+# Compliance-sensitive files require compliance reviewer.
+# Any PR touching these paths must be approved by the compliance team.
+AGENTS.md @NEH-Psychiatry/medsync-maintainers @NEH-Psychiatry/compliance-reviewers
+.github/copilot-instructions.md @NEH-Psychiatry/medsync-maintainers @NEH-Psychiatry/compliance-reviewers
+.github/ISSUE_TEMPLATE/compliance-review-task.md @NEH-Psychiatry/compliance-reviewers
+
+# Architecture decision records require maintainer and compliance sign-off.
+docs/architecture/ @NEH-Psychiatry/medsync-maintainers @NEH-Psychiatry/compliance-reviewers
+
+# Pull request template changes require maintainer approval.
+.github/pull-request-template.md @NEH-Psychiatry/medsync-maintainers
+
+# Application source code requires maintainer review.
+med_sync_app.py @NEH-Psychiatry/medsync-maintainers
+
+# Dependency changes require maintainer review.
+requirements.txt @NEH-Psychiatry/medsync-maintainers

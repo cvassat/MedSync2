@@ -14,15 +14,18 @@ This backlog converts the Azure Essentials update research into GitHub-trackable
 
 ### P0-1: Establish source-boundary and coding-agent rules
 
-- Status: started in this branch.
-- Files: `AGENTS.md`, `docs/azure-essentials-operationalization.md`.
+- Status: **complete**.
+- Files: `AGENTS.md`, `.github/copilot-instructions.md`, `.github/pull-request-template.md`, `.github/ISSUE_TEMPLATE/`, `CONTRIBUTING.md`, `SECURITY.md`, `CODEOWNERS`.
 - Definition of done:
-  - Coding agents can distinguish source-derived Azure points, current Microsoft documentation, MedSync2 decisions, and general market analysis.
-  - New files use hyphenated names except GitHub-reserved directories.
-  - PRs identify lifecycle stage and assumptions.
+  - ✅ Coding agents can distinguish source-derived Azure points, current Microsoft documentation, MedSync2 decisions, and general market analysis.
+  - ✅ New files use hyphenated names except GitHub-reserved directories.
+  - ✅ PRs identify lifecycle stage and assumptions.
+  - ✅ NEH Texas PMP guardrails are explicit in AGENTS.md and copilot-instructions.md.
+  - ✅ Compliance reviewer signoff requirement is in PR template and CONTRIBUTING.md.
 
 ### P0-2: Create Azure landing-zone decision record
 
+- Status: **draft** — options defined; decisions and owners pending.
 - Output path: `docs/architecture/azure-landing-zone-decision-record.md`.
 - Questions:
   - Which tenant and subscriptions will MedSync2 use?
@@ -36,6 +39,7 @@ This backlog converts the Azure Essentials update research into GitHub-trackable
 
 ### P0-3: Define identity and access model
 
+- Status: **draft** — constraints and `TODO(compliance):` items defined; prescriber/PDMP auth unverified.
 - Output path: `docs/architecture/identity-and-access-decision-record.md`.
 - Questions:
   - How will Microsoft Entra ID be used?
@@ -48,6 +52,7 @@ This backlog converts the Azure Essentials update research into GitHub-trackable
 
 ### P0-4: Define regulated-data and compliance evidence posture
 
+- Status: **draft** — PHI classification, de-identification constraints, and `TODO(compliance):` items defined; HIPAA BAA and PDMP retention decisions pending.
 - Output path: `docs/architecture/data-protection-decision-record.md`.
 - Questions:
   - Does MedSync2 process PHI, PII, credentials, or protected operational logs?
@@ -127,6 +132,7 @@ This backlog converts the Azure Essentials update research into GitHub-trackable
 
 ### P2-2: Add decision dashboard
 
+- Status: **complete**.
 - Output path: `docs/cloud-adoption-dashboard.md`.
 - Include:
   - P0/P1/P2 status.
@@ -137,6 +143,7 @@ This backlog converts the Azure Essentials update research into GitHub-trackable
 
 ### P2-3: Add executive brief
 
+- Status: **complete**.
 - Output path: `docs/executive-brief.md`.
 - Audience:
   - Product owner.

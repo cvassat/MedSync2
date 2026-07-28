@@ -5,10 +5,17 @@ MedSync2 includes an Azure Essentials operationalization package for turning clo
 ## Repository guidance
 
 - [`AGENTS.md`](AGENTS.md): coding-agent and contributor guidance, including NEH Texas PMP policy guardrails.
+- [`CONTRIBUTING.md`](CONTRIBUTING.md): contributor workflow, compliance obligations, and PR process.
+- [`SECURITY.md`](SECURITY.md): vulnerability reporting policy.
+- [`CODEOWNERS`](CODEOWNERS): code ownership and required reviewers.
 - [`.github/copilot-instructions.md`](.github/copilot-instructions.md): Copilot and Codex compliance instructions.
 - [`docs/azure-essentials-operationalization.md`](docs/azure-essentials-operationalization.md): source boundary, operating model, official-resource index, and implementation gates.
 - [`docs/cloud-adoption-backlog.md`](docs/cloud-adoption-backlog.md): P0/P1/P2 backlog for issues and pull requests.
-- [`docs/architecture/azure-landing-zone-decision-record.md`](docs/architecture/azure-landing-zone-decision-record.md): starter decision record for Azure landing-zone planning.
+- [`docs/cloud-adoption-dashboard.md`](docs/cloud-adoption-dashboard.md): current status of all backlog items, risks, and production-readiness blockers.
+- [`docs/executive-brief.md`](docs/executive-brief.md): executive summary of MedSync2 cloud adoption status and open decisions.
+- [`docs/architecture/azure-landing-zone-decision-record.md`](docs/architecture/azure-landing-zone-decision-record.md): landing-zone topology decision record.
+- [`docs/architecture/identity-and-access-decision-record.md`](docs/architecture/identity-and-access-decision-record.md): identity and access model decision record.
+- [`docs/architecture/data-protection-decision-record.md`](docs/architecture/data-protection-decision-record.md): data protection, PHI handling, and compliance evidence decision record.
 - [`.github/ISSUE_TEMPLATE/azure-essentials-task.md`](.github/ISSUE_TEMPLATE/azure-essentials-task.md): issue template for Azure Essentials-aligned work.
 - [`.github/ISSUE_TEMPLATE/data-model-task.md`](.github/ISSUE_TEMPLATE/data-model-task.md): issue template for data model and schema changes.
 - [`.github/ISSUE_TEMPLATE/vendor-mapping-task.md`](.github/ISSUE_TEMPLATE/vendor-mapping-task.md): issue template for vendor field mapping and integration work.
