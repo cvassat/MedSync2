@@ -19,7 +19,7 @@ Describe what changed and why it matters for MedSync2.
 
 ## Compliance sensitivity
 
-Check every box that applies. If any box is checked, a **compliance reviewer must be added to the reviewers list** and must approve before merge.
+Check every box that applies from the first six options. If one or more of the first six options is checked, add `compliance-review-required` label and a **compliance reviewer to the reviewers list**; compliance approval is required before merge.
 
 - [ ] Touches PMP workflow logic or PDMP integration
 - [ ] Encodes or modifies prescribing authority rules (PMHNP, MD, DO, PA, NP)
@@ -27,7 +27,7 @@ Check every box that applies. If any box is checked, a **compliance reviewer mus
 - [ ] Adds or changes patient-identifier handling, tokenization, or de-identification
 - [ ] Modifies dashboard mart queries or reporting exports that could surface PHI
 - [ ] Adds or changes a compliance flag, audit log field, or attestation record
-- [ ] None of the above — compliance review not required for this PR
+- [ ] None of the above — compliance review and label are not required for this PR (select this only when none of the six options above apply)
 
 ## PHI and data safety
 

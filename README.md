@@ -21,7 +21,7 @@ MedSync2 includes an Azure Essentials operationalization package for turning clo
 - [`.github/ISSUE_TEMPLATE/vendor-mapping-task.md`](.github/ISSUE_TEMPLATE/vendor-mapping-task.md): issue template for vendor field mapping and integration work.
 - [`.github/ISSUE_TEMPLATE/dashboard-metric-task.md`](.github/ISSUE_TEMPLATE/dashboard-metric-task.md): issue template for dashboard metrics and KPI work.
 - [`.github/ISSUE_TEMPLATE/compliance-review-task.md`](.github/ISSUE_TEMPLATE/compliance-review-task.md): issue template for compliance review requests.
-- [`.github/pull-request-template.md`](.github/pull-request-template.md): pull request checklist including compliance-sensitive items.
+- [`.github/pull_request_template.md`](.github/pull_request_template.md): pull request checklist including compliance-sensitive items.
 
 ## Operating model
 
