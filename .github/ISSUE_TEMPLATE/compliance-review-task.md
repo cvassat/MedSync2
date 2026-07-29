@@ -1,60 +1,67 @@
 ---
 name: Compliance review task
-description: Request a compliance review for a PR, feature, data model, or policy rule in MedSync2.
-title: "[Compliance Review]: "
-labels: ["compliance-review"]
+description: Request a formal compliance review of policy logic, PHI handling, PDMP workflow, or prescribing authority rules.
+title: "[Compliance review]: "
+labels: ["compliance-review-required"]
 assignees: []
 ---
 
-## Objective
+## Review request summary
 
-Describe the feature, PR, data model, or workflow rule that requires compliance review and the specific concern.
+Describe the change, feature, or design decision that requires compliance review and why.
 
-## Review type
+## Trigger
 
-- [ ] Clinical decision rule or prescribing authority logic
-- [ ] PDMP query or workflow step
-- [ ] De-identification or PHI handling
-- [ ] Dashboard mart or analytics view
-- [ ] Regulatory interpretation or policy encoding
+Check the reason this review was requested:
+
+- [ ] PR touches PMP workflow logic or PDMP integration
+- [ ] PR encodes or modifies prescribing authority rules (PMHNP, MD, DO, PA, NP)
+- [ ] PR references controlled-substance scheduling (Schedule II–V)
+- [ ] PR adds or changes patient-identifier handling, tokenization, or de-identification
+- [ ] PR modifies dashboard mart queries or reporting exports that could surface PHI
+- [ ] PR adds or changes a compliance flag, audit log field, or attestation record
+- [ ] Proactive review requested before implementation begins
+
+## Policy areas in scope
+
+Check all that apply:
+
+- [ ] Texas PMP prescriber requirements
+- [ ] Texas PDMP (PMP InterConnect / AWARxE) full-report review requirement
+- [ ] PMHNP prescribing authority under Texas Occupations Code
+- [ ] DEA Schedule II–V rules
+- [ ] HIPAA minimum necessary and PHI de-identification
 - [ ] Other (describe below)
 
-## Linked PR or issue
+## Specific questions for the compliance reviewer
 
-Add a link to the PR, issue, or commit that triggered this review.
+List each question that requires a verified answer before or during implementation. If you do not have the answer, write `TODO(compliance): <question>`.
 
-## Compliance questions to resolve
+1.
+2.
+3.
 
-List each specific question or uncertainty that the reviewer must answer before implementation proceeds. Use `TODO(compliance):` markers in code to cross-reference.
+## Known guardrail risks
 
-- [ ] TODO(compliance): 
-- [ ] TODO(compliance): 
-
-## Policy scope
-
-Describe which policies, regulations, or vendor agreements are implicated (e.g., Texas PMP Act, DEA Schedule II rules, HIPAA Privacy Rule, vendor DUA).
-
-## Hard-rule check
-
-- [ ] Does this change encode standalone Schedule II prescribing authority for outpatient PMHNPs? _(Must be No)_
-- [ ] Does this change treat score-only PDMP retrieval as full report review by default? _(Must be No)_
-- [ ] Does this change expose raw patient identifiers in a dashboard mart or analytics export? _(Must be No)_
-
-## Acceptance criteria
-
-- [ ] All `TODO(compliance):` markers in the linked PR are resolved or deferred with documented rationale
-- [ ] Reviewer has confirmed the policy source for each encoded clinical rule
-- [ ] PHI exposure risk is assessed and mitigation documented
-- [ ] Compliance reviewer has added a signoff comment on the linked PR
+- [ ] Risk of encoding PMHNP independent Schedule II authority — reviewed and mitigated
+- [ ] Risk of conflating score-only PDMP access with full-report review — reviewed and mitigated
+- [ ] Risk of exposing raw patient identifiers in mart or reporting layer — reviewed and mitigated
 
 ## Evidence and references
 
-Add links to policy documents, vendor agreements, clinical guidelines, decision records, or prior compliance reviews.
+Add links to relevant Texas statutes, DEA regulations, HIPAA guidance, internal policy documents, vendor specs, or related issues.
 
-## Reviewer notes
+## Reviewer
 
-_(Compliance reviewer fills this section in.)_
+Assign a compliance owner with authority to approve or reject the policy logic. Do not merge the related PR without this reviewer's explicit approval.
 
-## Open assumptions
+## Acceptance criteria
 
-- [ ]
+- [ ] All specific compliance questions answered with verified citations
+- [ ] Guardrail risks assessed and disposition documented
+- [ ] `TODO(compliance):` items in related PR resolved or deferred with justification
+- [ ] Related PR labeled `compliance-review-required` and this reviewer added
+- [ ] Compliance owner has approved the related PR
+
+## Notes
+

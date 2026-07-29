@@ -2,6 +2,39 @@
 
 This repository uses the Azure Essentials operationalization package as a planning and implementation guardrail for MedSync2 cloud, AI, security, resiliency, and GitHub workflow work.
 
+## NEH Texas PMP policy guardrails
+
+The following rules are **hard constraints** that apply to every agent, Codex task, Copilot suggestion, and human contribution. Violations require a mandatory compliance reviewer signoff before merge.
+
+### Absolute prohibitions
+
+1. **Never encode independent outpatient PMHNP Schedule II signing authority.** Do not write code, configuration, logic, or documentation that grants a psychiatric-mental-health nurse practitioner independent authority to prescribe or sign Schedule II controlled substances in an outpatient setting under Texas law unless a verified, current Texas statutory or regulatory citation is supplied and reviewed by a compliance owner.
+2. **Never count a score-only PDMP workflow as a full report review by default.** Accessing a risk score or summary does not satisfy the Texas PDMP full-report review requirement. Any workflow that records PDMP compliance must distinguish between score-only access and full-report review. Do not conflate the two without an explicit, reviewed policy decision.
+3. **Never expose raw patient identifiers in dashboard marts or reporting layers.** Patient names, MRNs, dates of birth, SSNs, and other direct identifiers must be removed or tokenized before data reaches any analytics mart, dashboard query, or reporting export. Use surrogate keys or de-identification functions; never pass raw PHI through mart or dashboard layers.
+
+### PHI and sensitive data rules
+
+- **No PHI in the repository.** Do not commit real patient names, MRNs, dates of birth, addresses, diagnoses, medication records, insurance identifiers, or any other Protected Health Information to source code, configuration files, tests, fixtures, or documentation.
+- Use synthetic or clearly labeled fake data for all examples, tests, and fixtures.
+- If a field name or schema column could hold PHI, annotate it with a `# PHI: <description>` comment and document the de-identification or access-control mechanism in the relevant architecture decision record.
+
+### No invented policy rules
+
+- Do not invent, assume, or extrapolate Texas PMP, DEA, or HIPAA policy rules from general knowledge. If the exact policy text is not available in the repository or linked reference, add a `TODO(compliance): verify <rule description>` comment and open a compliance review issue before implementing the logic.
+- Do not add compliance claims (HIPAA, HITRUST, SOC 2, FedRAMP, PDMP) without verified scope, evidence, and owner approval.
+
+### TODOs over assumptions
+
+- When a source field, vendor field, policy rule, or data mapping is unknown or unverified, add a `TODO(source): <description of what needs verification>` comment rather than making an assumption.
+- Mark every unverified vendor-specific field with `TODO(vendor): confirm field name and semantics with <vendor name>`.
+- Do not silently default to a value that may carry clinical or legal significance. Make the assumption visible.
+
+### Small PRs and compliance reviewer signoff
+
+- Keep pull requests small and focused on a single concern. Avoid mixing policy logic, data model changes, and infrastructure changes in one PR.
+- Any PR that touches PMP workflow logic, PDMP integration, prescribing authority rules, controlled-substance scheduling, or patient-identifier handling **must** include a compliance reviewer in the reviewers list and must not be merged without their approval.
+- Add `compliance-review-required` as a label on any such PR.
+
 ## Source-boundary rules
 
 When working from Azure Essentials material, keep these categories separate:
@@ -45,25 +78,7 @@ Every cloud, AI, governance, or documentation PR should answer:
 - Which Azure Essentials lifecycle stage does it support: readiness and foundation, design and govern, or manage and optimize?
 - What security, cost, reliability, and compliance assumptions are introduced?
 - What remains unverified or environment-specific?
-
-## Compliance and PHI guardrails
-
-These rules apply to every agent, Codex task, and human contributor. Violating any of them is a blocking issue.
-
-### Hard rules — never do these
-
-1. **Never encode independent outpatient PMHNP Schedule II signing authority.** Texas PMP policy requires collaborative practice agreement oversight for Schedule II controlled substances by PMHNPs in outpatient settings. Any logic that grants or implies standalone Schedule II prescribing authority for outpatient PMHNPs must not be committed.
-2. **Never count a score-only PDMP workflow as a full report review by default.** Retrieving or displaying a risk score alone does not satisfy the full PDMP report-review requirement. Any workflow step modelling PDMP compliance must distinguish between score-only retrieval and full report review.
-3. **Never expose raw patient identifiers in dashboard marts.** Analytics views, reporting marts, and dashboard queries must use de-identified or tokenized references. Direct patient identifiers (MRN, name, DOB, SSN, contact info) must not appear in mart tables or exported query results.
-
-### General compliance rules
-
-- **No PHI in the repository.** Do not commit, log, or embed protected health information in source code, configuration files, test fixtures, documentation, or comments. Use synthetic data or clearly labelled placeholder tokens in tests and examples.
-- **No invented policy rules.** Do not encode a regulatory interpretation, clinical workflow rule, or compliance requirement that is not explicitly sourced from a cited policy document, vendor specification, or owner-approved decision record. If the authoritative source is unknown, use a `TODO` comment instead.
-- **TODOs instead of assumptions.** When a source document, vendor field mapping, clinical rule, or regulatory citation is unknown at implementation time, insert a `TODO(compliance):` comment that describes exactly what must be resolved before the code can be considered production-ready. Do not guess or fill in plausible-sounding values.
-- **Small, reviewable pull requests.** Break work into PRs that can be reviewed in a single sitting. PRs that touch compliance logic, data model fields, or PDMP/PMP workflow must not exceed 400 changed lines without owner approval.
-- **Compliance reviewer signoff for policy logic.** Any PR that adds or modifies clinical decision rules, PDMP query logic, prescribing authority checks, or de-identification logic must include a signoff comment from a designated compliance reviewer before merge. Tag the reviewer in the PR description using the label `compliance-review`.
-- **Source-boundary documentation required.** Every compliance-relevant decision must be traceable to one of the four source-boundary categories defined in the *Source-boundary rules* section above. State the category explicitly in the PR description or decision record.
+- Does this PR touch PMP workflow, PDMP integration, prescribing authority, or patient identifiers? If yes, is a compliance reviewer assigned?
 
 ## Recommended docs to keep current
 

@@ -1,53 +1,57 @@
 ---
 name: Data model task
-description: Add, modify, or review a MedSync2 data model, table schema, or mart definition.
-title: "[Data Model]: "
+description: Propose or track a change to the MedSync2 data model, schema, or mart layer.
+title: "[Data model]: "
 labels: ["data-model"]
 assignees: []
 ---
 
 ## Objective
 
-Describe the data model change, new table, or schema update this task should produce.
+Describe the data model change, new table or column, schema migration, or mart update this task should produce.
 
-## Scope
+## Affected tables or entities
 
-### In scope
-
-- [ ]
-
-### Out of scope
+List the tables, views, marts, or domain objects involved.
 
 - [ ]
 
-## Compliance checklist
+## PHI and de-identification
 
-- [ ] No raw patient identifiers (MRN, name, DOB, SSN, contact info) in mart or analytics tables
-- [ ] De-identification or tokenization strategy documented for any field that touches PHI
-- [ ] Field-level source citation provided or `TODO(source-unknown): <field>` added for each column whose regulatory status is unclear
-- [ ] Data retention and access-control assumptions documented
+- [ ] No raw patient identifiers (name, MRN, DOB, SSN) will be present in the target layer
+- [ ] All PHI-bearing columns are annotated `# PHI: <description>` in the schema definition
+- [ ] De-identification or tokenization mechanism is documented or linked below
+- [ ] Surrogate keys or de-identified tokens are used in mart and reporting layers
 
-## Vendor and source mapping
+If de-identification approach is not yet determined: `TODO(compliance): define de-identification strategy for <table/column>`
 
-List each external data source or vendor field this model depends on. If the field definition is unknown, add a `TODO(vendor-mapping): <vendor>/<field>` entry.
+## Policy dependencies
 
-| Field | Source / Vendor | Mapping status |
-|-------|----------------|---------------|
-| | | ☐ Confirmed / ☐ TODO |
+List any PMP, PDMP, DEA, or HIPAA rules that constrain this schema change. If a rule is not yet verified, add a `TODO(compliance):` entry.
+
+- [ ]
+
+## Source boundary
+
+- [ ] Source-derived Azure point
+- [ ] Current Microsoft documentation
+- [ ] MedSync2-specific implementation decision
+- [ ] General cloud-market analysis
 
 ## Acceptance criteria
 
-- [ ] Schema includes no raw patient identifiers in mart-facing views
-- [ ] All PHI fields are clearly marked with de-identification method or `TODO(compliance):`
-- [ ] Source boundary is documented for each new field
-- [ ] Architecture decision record updated in `docs/architecture/` if this changes the data topology
-
-## Evidence and references
-
-Add links to source documents, vendor specs, ERDs, decision records, or Microsoft docs.
+- [ ] Schema change is documented in `docs/architecture/` if it affects protected data flow
+- [ ] No raw patient identifiers in mart or reporting layers
+- [ ] All PHI columns annotated
+- [ ] Migration script (if applicable) reviewed and tested against synthetic data
+- [ ] `TODO(compliance):` and `TODO(vendor):` items are filed as follow-up issues or addressed
 
 ## Open assumptions
 
+List anything not yet verified. Use `TODO(compliance):` or `TODO(vendor):` format.
+
 - [ ]
 
-## Notes
+## References
+
+Add links to related issues, decision records, vendor docs, or policy sources.

@@ -1,58 +1,64 @@
 ---
 name: Vendor mapping task
-description: Map a vendor API, PDMP data feed, pharmacy system, or external integration to MedSync2 fields.
-title: "[Vendor Mapping]: "
+description: Track the mapping of a vendor-specific field, code set, or integration to MedSync2 internal schema.
+title: "[Vendor mapping]: "
 labels: ["vendor-mapping"]
 assignees: []
 ---
 
 ## Objective
 
-Describe the vendor integration or field mapping this task should produce.
+Describe the vendor system, integration endpoint, or field set to be mapped.
 
-## Vendor / integration
+## Vendor and system details
 
-Name of the vendor, API, or data feed (e.g., Bamboo Health PDMP, Surescripts, Epic FHIR).
+- Vendor name:
+- System or product:
+- Integration type (HL7, FHIR, CSV, API, other):
+- Known contact or documentation source:
 
-## Scope
+## Fields to map
 
-### In scope
+List each vendor field alongside the target MedSync2 field. Mark unknown fields with `TODO(vendor): confirm field name and semantics with <vendor>`.
+
+| Vendor field | Vendor type | MedSync2 field | Notes / TODO |
+|---|---|---|---|
+| | | | |
+
+## PHI considerations
+
+- [ ] Vendor payload contains PHI (names, MRNs, DOBs, diagnoses, etc.)
+- [ ] PHI is stripped or tokenized before storage
+- [ ] Mapping does not surface raw identifiers in mart or reporting layers
+- [ ] `# PHI: <description>` annotations added to relevant schema columns
+
+## Policy dependencies
+
+List any PMP, PDMP, DEA, or HIPAA rules that apply to this vendor's data. If a rule is unverified, add a `TODO(compliance):` entry.
 
 - [ ]
 
-### Out of scope
+## Source boundary
 
-- [ ]
-
-## Field mapping table
-
-Document each vendor field and its MedSync2 target. Mark any field whose mapping is unconfirmed with `TODO(vendor-mapping):`.
-
-| Vendor field | MedSync2 field | Data type | PHI? | Mapping status |
-|-------------|---------------|----------|------|---------------|
-| | | | ☐ Yes / ☐ No | ☐ Confirmed / ☐ TODO |
-
-## Compliance checklist
-
-- [ ] Vendor contract or data-use agreement confirmed before implementation begins
-- [ ] PHI fields identified and de-identification strategy documented
-- [ ] No raw patient identifiers passed to dashboard marts or analytics exports
-- [ ] PDMP fields clearly distinguish score-only data from full report data
-- [ ] All unconfirmed mappings marked `TODO(vendor-mapping): <vendor>/<field>`
+- [ ] Source-derived Azure point
+- [ ] Current Microsoft documentation
+- [ ] MedSync2-specific implementation decision
+- [ ] Vendor documentation
 
 ## Acceptance criteria
 
-- [ ] All confirmed field mappings are documented with source citations
-- [ ] Unconfirmed mappings have `TODO(vendor-mapping):` markers in code and in this issue
-- [ ] PHI handling strategy is reviewed before any mapping is implemented in production code
-- [ ] Architecture decision record updated in `docs/architecture/` if this changes integration topology
-
-## Evidence and references
-
-Add links to vendor API docs, data dictionaries, DUAs, decision records, or related issues.
+- [ ] All vendor fields either mapped or marked `TODO(vendor):`
+- [ ] PHI fields identified and de-identification approach documented
+- [ ] Mapping table or transformation logic reviewed by a data owner
+- [ ] Compliance-sensitive fields reviewed by a compliance owner if they encode policy rules
+- [ ] Architecture decision record updated if the integration affects protected data flow
 
 ## Open assumptions
 
+List anything not yet confirmed with the vendor. Use `TODO(vendor): confirm <field> with <vendor>` format.
+
 - [ ]
 
-## Notes
+## References
+
+Add links to vendor documentation, HL7/FHIR specs, related issues, or decision records.
