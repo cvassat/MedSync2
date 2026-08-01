@@ -4,6 +4,39 @@
 
 MedSync2 is a calculation-only Streamlit application for estimating medication units required until a refill synchronization date. Preserve the distinction between mathematical planning and clinical, prescribing, dispensing, legal, or compliance decisions.
 
+## NEH Texas PMP policy guardrails
+
+The following rules are **hard constraints** that apply to every agent, Codex task, Copilot suggestion, and human contribution. Violations require a mandatory compliance reviewer signoff before merge.
+
+### Absolute prohibitions
+
+1. **Never encode independent outpatient PMHNP Schedule II signing authority.** Do not write code, configuration, logic, or documentation that grants a psychiatric-mental-health nurse practitioner independent authority to prescribe or sign Schedule II controlled substances in an outpatient setting under Texas law unless a verified, current Texas statutory or regulatory citation is supplied and reviewed by a compliance owner.
+2. **Never count a score-only PDMP workflow as a full report review by default.** Accessing a risk score or summary does not satisfy the Texas PDMP full-report review requirement. Any workflow that records PDMP compliance must distinguish between score-only access and full-report review. Do not conflate the two without an explicit, reviewed policy decision.
+3. **Never expose raw patient identifiers in dashboard marts or reporting layers.** Patient names, MRNs, dates of birth, SSNs, and other direct identifiers must be removed or tokenized before data reaches any analytics mart, dashboard query, or reporting export. Use surrogate keys or de-identification functions; never pass raw PHI through mart or dashboard layers.
+
+### PHI and sensitive data rules
+
+- **No PHI in the repository.** Do not commit real patient names, MRNs, dates of birth, addresses, diagnoses, medication records, insurance identifiers, or any other Protected Health Information to source code, configuration files, tests, fixtures, or documentation.
+- Use synthetic or clearly labeled fake data for all examples, tests, and fixtures.
+- If a field name or schema column could hold PHI, annotate it with a `# PHI: <description>` comment and document the de-identification or access-control mechanism in the relevant architecture decision record.
+
+### No invented policy rules
+
+- Do not invent, assume, or extrapolate Texas PMP, DEA, or HIPAA policy rules from general knowledge. If the exact policy text is not available in the repository or linked reference, add a `TODO(compliance): verify <rule description>` comment and open a compliance review issue before implementing the logic.
+- Do not add compliance claims (HIPAA, HITRUST, SOC 2, FedRAMP, PDMP) without verified scope, evidence, and owner approval.
+
+### TODOs over assumptions
+
+- When a source field, vendor field, policy rule, or data mapping is unknown or unverified, add a `TODO(source): <description of what needs verification>` comment rather than making an assumption.
+- Mark every unverified vendor-specific field with `TODO(vendor): confirm field name and semantics with <vendor name>`.
+- Do not silently default to a value that may carry clinical or legal significance. Make the assumption visible.
+
+### Small PRs and compliance reviewer signoff
+
+- Keep pull requests small and focused on a single concern. Avoid mixing policy logic, data model changes, and infrastructure changes in one PR.
+- Any PR that touches PMP workflow logic, PDMP integration, prescribing authority rules, controlled-substance scheduling, or patient-identifier handling **must** include a compliance reviewer in the reviewers list and must not be merged without their approval.
+- Add `compliance-review-required` as a label on any such PR.
+
 ## Application invariants
 
 1. Keep calculation logic in `medsync/calculator.py`; do not call Streamlit from the core module.
@@ -66,6 +99,15 @@ Use current Microsoft terminology unless a legacy name is needed for searchabili
 - Azure Verified Modules when evaluating reusable Bicep or Terraform modules.
 
 Do not imply that the Azure Essentials source deck directly compares Azure and AWS.
+
+## Pull request checklist
+
+- What MedSync2 capability does this enable?
+- Is the change source-derived, current-doc verified, or MedSync2-specific?
+- Which Azure Essentials lifecycle stage does it support: readiness and foundation, design and govern, or manage and optimize?
+- What security, cost, reliability, and compliance assumptions are introduced?
+- What remains unverified or environment-specific?
+- Does this PR touch PMP workflow, PDMP integration, prescribing authority, or patient identifiers? If yes, is a compliance reviewer assigned?
 
 ## Recommended documents to keep current
 
