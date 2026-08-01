@@ -16,7 +16,7 @@ MedSync2 is a Streamlit-based planning calculator that estimates additional medi
 - [`.github/ISSUE_TEMPLATE/vendor-mapping-task.md`](.github/ISSUE_TEMPLATE/vendor-mapping-task.md): issue template for vendor field mapping and integration work.
 - [`.github/ISSUE_TEMPLATE/dashboard-metric-task.md`](.github/ISSUE_TEMPLATE/dashboard-metric-task.md): issue template for dashboard metrics and KPI work.
 - [`.github/ISSUE_TEMPLATE/compliance-review-task.md`](.github/ISSUE_TEMPLATE/compliance-review-task.md): issue template for compliance review requests.
-- [`.github/pull-request-template.md`](.github/pull-request-template.md): pull request checklist including compliance-sensitive items.
+- [`.github/pull_request_template.md`](.github/pull_request_template.md): pull request checklist including compliance-sensitive items.
 
 ## Approved operating posture
 
@@ -103,14 +103,14 @@ docker build -t medsync2 .
 docker run --rm -p 8501:8501 medsync2
 ```
 
-Then open `http://localhost:8501` from an approved internal network path only.
+Then open `http://localhost:8501` from an approved internal network path only. This is a development and controlled internal-evaluation artifact, not an approved production deployment. See [`docs/architecture/container-deployment-baseline.md`](docs/architecture/container-deployment-baseline.md) for its security, cost, reliability, data, and compliance assumptions and cloud-backlog gates.
 
 ## Repository layout
 
 - `med_sync_app.py`: Streamlit presentation layer.
 - `medsync/calculator.py`: pure validation and calculation logic.
 - `tests/`: regression and Streamlit application tests.
-- `docs/architecture/application-design.md`: application contract, boundaries, and exclusions.
+- `docs/architecture/application-design.md`: application contract, boundaries, and exclusions.\n- `docs/architecture/container-deployment-baseline.md`: container security, cost, reliability, data, compliance, and production-blocking assumptions.
 - `docs/code-review-and-hardening-report-2026-07-21.md`: review findings, remediation, and residual risks.
 - `docs/release-readiness-checklist.md`: pre-merge and pre-deployment gate.
 - `docs/owner-decisions-2026-07-24.md`: owner-approved license, use, review, merge, and visibility decisions.
